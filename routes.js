@@ -1,9 +1,18 @@
 const Express = require('express');
-const Routes = (app)=>
+
+const TeamController = require('./controllers/team.con'); 
+const TeamRouter = Express.Router();
+
+const DishController = require('./controllers/dishes.con');
+const DishRouter = Express.Router();
+
+TeamRouter.post('/',TeamController.create);
+DishRouter.post('/',DishController.create);
+
+const routes = (app)=>
 {
-    app.get('/',(req,res)=>
-    {
-        return res.send({message:"Server listening "});
-    })
+    app.use('/team', TeamRouter);
+    app.use('/dish', DishRouter);
 }
-module.exports = Routes;
+
+module.exports = routes;
